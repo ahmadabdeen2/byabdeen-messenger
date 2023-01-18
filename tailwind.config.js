@@ -15,6 +15,7 @@ module.exports = {
       colors:{
         primary: '#0A27F1',
         secondary: '#E7E7E5',
+        background:"#171717"
       },
     },
     screens: {

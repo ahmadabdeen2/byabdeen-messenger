@@ -8,8 +8,6 @@ import {fetcher} from '../utils/fetchMessages'
 const ChatInput = () => {
     const [input, setInput] = useState('')
     const {data: messages, error, mutate} = useSWR<Message[]>('/api/getMessages', fetcher)
-
-    console.log(messages)
     const addMessage = async (e: FormEvent<HTMLFormElement> )=>{
         e.preventDefault();
         if(!input) return;
@@ -45,7 +43,7 @@ const ChatInput = () => {
         });
     }
   return (
-    <form onSubmit ={addMessage} className='fixed w-full flex bg-white bottom-0 px-10 py-5 space-x-2 border-t border-secondary z-50'>
+    <form onSubmit ={addMessage} className='fixed w-full flex bg-background bottom-0 px-10 py-5 space-x-2 border-t border-secondary z-50'>
       <input type="text" 
       placeholder="Start typing..."
       onChange={(e)=> setInput(e.target.value)}

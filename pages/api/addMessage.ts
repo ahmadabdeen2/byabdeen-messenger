@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import client_redis from '../../redis'
 import { Message } from '../../typings'
+import { serverPusher } from '../../pusher';
 type Data = {
   message: Message
 }
@@ -24,6 +25,7 @@ export default async function handler(
         created_at: Date.now(),
     }
     await client_redis.hset('message', message.id, JSON.stringify(newMessage))
+    serverPusher.trigger("messages", "new-message",  newMessage)
 
 
   res.status(200).json({ message: newMessage })

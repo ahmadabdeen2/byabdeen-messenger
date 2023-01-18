@@ -1,12 +1,15 @@
 
 import MessageList from './MessageList'
 import ChatInput from './ChatInput'
-const HomePage = () => {
-  return (
-    <main>
+import { Message } from '../typings'
+const HomePage = async () => {
+    const data = await fetch(`${process.env.VERCEL_URL || 'http://localhost:3000'}/api/getMessages`).then(res => res.json());
 
-    {/* MessageList */}
-    <MessageList />
+    const messages: Message[] = data.messages;
+
+  return (
+    <main className='bg-background'>
+    <MessageList initial={messages}/>
     <ChatInput/>
 
     </main>
