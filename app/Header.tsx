@@ -7,11 +7,12 @@ import { unstable_getServerSession } from "next-auth/next";
 import {useSession} from 'next-auth/react'
 import {useEffect, useState} from 'react'
 type Props = {
-    session: Awaited<ReturnType<typeof unstable_getServerSession>>;
-    user?: any
+    session: any,
+    
 }
 
 const Header = ({session}: Props) => {
+
 
 
   return (
