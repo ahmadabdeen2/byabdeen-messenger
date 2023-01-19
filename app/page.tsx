@@ -7,7 +7,7 @@ import { Providers } from './providers';
 import Header from './Header';
 const HomePage = async () => {
 
-    const data = await fetch(`${process.env.VERCEL_URL || 'http://localhost:3000'}/api/getMessages`).then(res => res.json());
+    const data = await fetch(`${process.env.VERCEL_URL}/api/getMessages`).then(res => res.json());
     const messages: Message[] = data.messages;
     const session = await unstable_getServerSession()
     console.log(session)
