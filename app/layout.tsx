@@ -1,7 +1,8 @@
 import '../styles/globals.css'
 import localfont from '@next/font/local'
 import Header  from './Header'
-
+import {Providers} from './providers'
+import { unstable_getServerSession } from 'next-auth'
 
 
 const RandomFont = localfont({
@@ -35,13 +36,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  
   return (
     <html className={`${RandomFont.variable}`}>
       <head />
       
       <body>
         <Header />
-        {children}</body>
+
+     {children}</body>
     </html>
   )
 }

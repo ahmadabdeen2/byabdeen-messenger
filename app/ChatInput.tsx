@@ -5,22 +5,27 @@ import useSWR from 'swr'
 import {v4 as uuid} from 'uuid'
 import { Message } from '../typings';
 import {fetcher} from '../utils/fetchMessages'
-const ChatInput = () => {
+import { unstable_getServerSession } from 'next-auth';
+type Props = {
+    session: Awaited<ReturnType<typeof unstable_getServerSession>>
+}
+const ChatInput = ({session}: Props) => {
     const [input, setInput] = useState('')
     const {data: messages, error, mutate} = useSWR<Message[]>('/api/getMessages', fetcher)
     const addMessage = async (e: FormEvent<HTMLFormElement> )=>{
         e.preventDefault();
-        if(!input) return;
+        if(!input || !session) return;
         const messageToSend = input;
         setInput('')
         const id = uuid()
+        
         const message: Message = {
             id,
             message: messageToSend,
             created_at: Date.now(),
-            username: 'Ahmad Abdeen',
-            profilePic: 'https://scontent.fsaw1-11.fna.fbcdn.net/v/t39.30808-1/319841301_2401036236727162_4189100520622995924_n.jpg?stp=dst-jpg_p480x480&_nc_cat=100&ccb=1-7&_nc_sid=7206a8&_nc_ohc=gEszElTnZHQAX9bBH_t&_nc_ht=scontent.fsaw1-11.fna&oh=00_AfDN3uVzFxW2fFKG1XEuDGfQje5fFwRX-DUIegZ-14k2EQ&oe=63CCBDDB',
-            email:'ahmadabdin3@gmail.com'
+            username: session?.user?.name!,
+            profilePic: session?.user?.image!,
+            email: session?.user?.email!
         }
 
         const uploadMessageToUpstash = async () => {
@@ -43,8 +48,9 @@ const ChatInput = () => {
         });
     }
   return (
-    <form onSubmit ={addMessage} className='fixed w-full flex bg-background bottom-0 px-10 py-5 space-x-2 border-t border-secondary z-50'>
+    <form onSubmit ={addMessage} className='fixed w-full flex bg-secondary bottom-0 px-10 py-5 space-x-2 border-t border-secondary z-50'>
       <input type="text" 
+      disabled={!session}
       placeholder="Start typing..."
       onChange={(e)=> setInput(e.target.value)}
         value={input}

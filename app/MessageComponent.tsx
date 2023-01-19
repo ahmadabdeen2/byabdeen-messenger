@@ -1,5 +1,7 @@
 import {Message }   from '../typings'
 import Image from 'next/image'
+import { useSession } from 'next-auth/react'
+import TimeAgo from 'react-timeago'
 
 type Props = { 
     message: Message,
@@ -7,7 +9,10 @@ type Props = {
 }
 
 const MessageComponent = ({message}: Props) => {
-const isUser = true
+
+const {data:session} = useSession();
+const isUser = session?.user?.email === message.email;
+
   return (
     <div className={`flex w-fit ${isUser && 'ml-auto'}`}>
         <div className={`flex-shrink-0 ${isUser && 'order-2'}`}>
@@ -19,7 +24,8 @@ const isUser = true
                 <div className={`px-3 py-2 rounded-lg w-fit  ${isUser ? 'bg-secondary ml-auto order-2 text-primary' : 'bg-primary text-white' }`}>
                     <p> {message.message}</p>
                 </div>
-                <p className={`text-[0.65rem] italic px-2 text-gray-500 ${isUser && 'text-right'}`}>{new Date(message.created_at).toLocaleString()}</p>
+                <p className={`text-[0.65rem] italic px-2 text-gray-500 ${isUser && 'text-right'}`}><TimeAgo date={new Date(message.created_at).toLocaleString()}/></p>
+                
             </div>
         </div>
     </div>

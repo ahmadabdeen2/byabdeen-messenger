@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 import logo from "../public/assets/logo.svg";
+import { unstable_getServerSession } from "next-auth/next";
+import {useSession} from 'next-auth/react'
 
-const Header = () => {
-  const session = false;
+const Header = async () => {
+  const session = await unstable_getServerSession();
+
   return (
     <>
       <header className="sticky top-0 z-50 bg-secondary flex justify-center items-center p-10 shadow-md w-full">
@@ -14,16 +17,18 @@ const Header = () => {
             <div className="flex space-x-2 items-center ">
               <div className="flex items-center w-16 mr-4">
                 <Image
-                  src={logo}
+                  src={session?.user?.image!}
+                  height={10}
+                    width={50}
                   alt="logo"
                   className="rounded-full mx-2 object-contain"
                 />
               </div>
               <div>
-                <p className="font-random text-white"> Logged in as:</p>
-                <p className=" font-random font-semibold text-lg text-white">
+                <p className="font-random text-primary"> Logged in as:</p>
+                <p className=" font-random font-semibold text-lg text-primary">
                   {" "}
-                  Ahmad Abdeen
+                    {session?.user?.name}{" "}
                 </p>
               </div>
             </div>
