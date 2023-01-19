@@ -7,7 +7,7 @@ import { Message } from '../typings';
 import {fetcher} from '../utils/fetchMessages'
 import { unstable_getServerSession } from 'next-auth';
 type Props = {
-    session: Awaited<ReturnType<typeof unstable_getServerSession>>
+    session: any
 }
 const ChatInput = ({session}: Props) => {
     const [input, setInput] = useState('')

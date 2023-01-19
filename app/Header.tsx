@@ -5,6 +5,7 @@ import LogoutButton from "./LogoutButton";
 import logo from "../public/assets/logo.svg";
 import { unstable_getServerSession } from "next-auth/next";
 import {useSession} from 'next-auth/react'
+import {useEffect} from 'react'
 
 const Header = async () => {
   const session = await unstable_getServerSession();
@@ -39,13 +40,7 @@ const Header = async () => {
             <div className="flex space-x-2 items-center w-16">
               <Image src={logo} alt="logo" />
             </div>
-            <Link
-              href="/auth/signin"
-              className={`bg-primary text-white py-2 px-4 rounded-lg font-random font-normal text-2xl hover:bg-secondary hover:text-primary transition-all `}
-            >
-              {" "}
-              Sign In{" "}
-            </Link>
+           
           </div>
         )}
       </header>
