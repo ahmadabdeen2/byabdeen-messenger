@@ -31,7 +31,7 @@ const RandomFont = localfont({
 })
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
@@ -42,7 +42,7 @@ export default function RootLayout({
       <head />
       
       <body className='bg-secondary'>
-        <Header />
+ 
 
      {children}</body>
     </html>
