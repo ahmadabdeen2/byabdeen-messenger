@@ -6,11 +6,15 @@ import { unstable_getServerSession } from 'next-auth';
 import { Providers } from './providers';
 import Header from './Header';
 const HomePage = async () => {
-
+  
     const data = await fetch(`https://${process.env.VERCEL_URL}/api/getMessages`).then(res => res.json());
-    const messages: Message[] = data.messages;
+
+
+    const messages: Message[] = JSON.parse(data.messages);
+    
+    
     const session = await unstable_getServerSession()
-    console.log(session)
+
  
   return (
     <Providers session={session}>

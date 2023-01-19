@@ -21,7 +21,7 @@ const isUser = session?.user?.email === message.email;
         <div >
             <p className={`text-[0.65rem] px-[2px] pb-[2px]  ${isUser ? 'text-primary text-right' : 'text-gray-500 text-left'}`}> {message.username} </p>
             <div className='flex items-end'>
-                <div className={`px-3 py-2 rounded-lg w-fit  ${isUser ? 'bg-secondary ml-auto order-2 text-primary' : 'bg-primary text-white' }`}>
+                <div className={`px-3 py-2 rounded-lg w-fit  ${isUser ? 'bg-white ml-auto order-2 text-primary' : 'bg-primary text-white' }`}>
                     <p> {message.message}</p>
                 </div>
                 <p className={`text-[0.65rem] italic px-2 text-gray-500 ${isUser && 'text-right'}`}><TimeAgo date={new Date(message.created_at).toLocaleString()}/></p>

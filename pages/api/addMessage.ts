@@ -4,11 +4,12 @@ import client_redis from '../../redis'
 import { Message } from '../../typings'
 import { serverPusher } from '../../pusher';
 type Data = {
-  message: Message
+  message: string
 }
 type ErrorData ={
     name: string
 }
+
 
 
 export default async function handler(
@@ -28,5 +29,5 @@ export default async function handler(
     serverPusher.trigger("messages", "new-message",  newMessage)
 
 
-  res.status(200).json({ message: newMessage })
+  res.status(200).json({ message: JSON.stringify(newMessage) })
 }

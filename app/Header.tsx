@@ -46,6 +46,8 @@ const Header = ({session}: Props) => {
             <div className="flex space-x-2 items-center w-16">
               <Image src={logo} alt="logo" />
             </div>
+            <Link  
+                              className={`bg-primary text-white py-2 px-4 rounded-lg font-random font-normal text-xs sm:text-sm md:text-md hover:bg-secondary hover:text-primary transition-all `} href={"/auth/signin"}> Sign In</Link>
            
           </div>
         )}
