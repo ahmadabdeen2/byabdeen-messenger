@@ -5,7 +5,7 @@ export const fetcher = async() => {
 
     // const messages: Message[] = data.messages;
 
-    const messages: Message[] = JSON.parse(data.messages);
+    const messages: Message[] = data.messages;
 
     return messages;
 }

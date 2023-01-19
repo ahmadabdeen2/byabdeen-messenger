@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import client_redis from '../../redis'
 import { Message } from '../../typings'
 type Data = {
-  messages: string
+  messages: Message[]
 }
 type ErrorData ={
     name: string
@@ -20,10 +20,5 @@ export default async function handler(
     }
     const messagesRes = await client_redis.hvals('message')
     const messages: Message[] = messagesRes.map((message) => JSON.parse(message)).sort((a,b ) => b.created_at - a.created_at)
-    // console.log(messages)
-    // console.log(JSON.stringify(messages))
-    // console.log(JSON.parse(JSON.stringify(messages)))
-    
-
-  res.status(200).json({ messages:  JSON.stringify(messages) })
+  res.status(200).json({ messages:  messages })
 }

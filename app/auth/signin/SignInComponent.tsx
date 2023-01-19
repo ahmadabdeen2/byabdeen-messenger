@@ -13,7 +13,7 @@ const SignInComponent = ({providers}: Props) => {
         {Object.values(providers!).map((provider) => (
             <div key={provider.name}>
                 <button onClick={() => signIn(provider.id, {
-                    callbackUrl: process.env.VERCEL_URL || 'http://localhost:3000'
+                        callbackUrl: process.env.NEXTAUTH_URL || 'http://localhost:3000',
                 })}>
                     
     <a href="#" className="flex items-center justify-center w-full px-4 py-2 mt-2 space-x-3 text-sm text-center bg-blue-500 text-white transition-colors duration-200 transform border rounded-lg dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700">

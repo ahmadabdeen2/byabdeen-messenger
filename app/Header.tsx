@@ -12,9 +12,6 @@ type Props = {
 }
 
 const Header = ({session}: Props) => {
-
-
-
   return (
     <>
       <header className="sticky top-0 z-51 bg-secondary flex justify-center items-center p-10 shadow-md w-full">

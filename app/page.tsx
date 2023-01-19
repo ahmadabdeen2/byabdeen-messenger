@@ -5,13 +5,15 @@ import { Message } from '../typings'
 import { unstable_getServerSession } from 'next-auth';
 import { Providers } from './providers';
 import Header from './Header';
+import client_redis from '../redis';
 const HomePage = async () => {
   
-    const data = await fetch(`https://${process.env.VERCEL_URL}/api/getMessages`).then(res => res.json());
+    const messagesRes = await client_redis.hvals('messages')
+    const messages: Message[] = messagesRes
+    .map((message) => JSON.parse(message))
+    .sort((a, b) => a.created_at - b.created_at)
 
 
-    const messages: Message[] = JSON.parse(data.messages);
-    
     
     const session = await unstable_getServerSession()
 

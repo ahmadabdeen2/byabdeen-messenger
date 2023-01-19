@@ -3,31 +3,36 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import client_redis from '../../redis'
 import { Message } from '../../typings'
 import { serverPusher } from '../../pusher';
+
 type Data = {
-  message: string
-}
-type ErrorData ={
-    name: string
+  message: Message
 }
 
-
+type ErrorData = {
+  body: string
+}
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data | ErrorData>
 ) {
-    if (req.method !== 'POST'){
-        res.status(405).json({ name: 'Method not allowed' })
-        return 
-    }
-    const { message } = req.body;
-    const newMessage = {
-        ...message,
-        created_at: Date.now(),
-    }
-    await client_redis.hset('message', message.id, JSON.stringify(newMessage))
-    serverPusher.trigger("messages", "new-message",  newMessage)
+  if (req.method !== 'POST') {
+    res.status(405).json({ body: 'Method Not Allowed' })
+    return
+  }
 
+  const { message } = req.body
 
-  res.status(200).json({ message: JSON.stringify(newMessage) })
+  const newMessage = {
+    ...message,
+    // - Replace the timestamp of the user to the timestamp of the server.
+    created_at: Date.now(),
+  }
+
+  // - Push to Upstash Redis db
+  await client_redis.hset('messages', message.id, JSON.stringify(newMessage))
+  // - Push to Pusher
+  await serverPusher.trigger('messages', 'new-message', newMessage)
+
+  res.status(201).json({ message: newMessage })
 }
