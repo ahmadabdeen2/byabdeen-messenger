@@ -41,7 +41,7 @@ export default function RootLayout({
     <html className={`${RandomFont.variable}`}>
       <head />
       
-      <body>
+      <body className='bg-secondary'>
         <Header />
 
      {children}</body>

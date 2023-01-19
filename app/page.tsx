@@ -15,7 +15,6 @@ const HomePage = async () => {
     <main className='bg-secondary'>
     <MessageList initial={messages}/>
     <ChatInput session={session}/>
-
     </main>
     </Providers>
   )
