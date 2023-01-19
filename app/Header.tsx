@@ -17,7 +17,7 @@ const Header = ({session}: Props) => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-secondary flex justify-center items-center p-10 shadow-md w-full">
+      <header className="sticky top-0 z-51 bg-secondary flex justify-center items-center p-10 shadow-md w-full">
         {session ? (
             <div className="flex  items-center justify-between w-full just ">
     
