@@ -19,7 +19,8 @@
     "react-timeago": "^7.1.0",
     "swr": "^2.0.0",
     "uuid": "^9.0.0",
-    "v8": "^0.1.0"
+    "v8": "^0.1.0",
+    "vercel": "^28.12.8"
   },
   "devDependencies": {
     "@types/node": "18.11.3",
