@@ -9,6 +9,7 @@ export const authOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET!,
+  url: process.env.NEXTAUTH_URL!,
   pages: {
     signIn: '/auth/signin',
   },

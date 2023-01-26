@@ -1,4 +1,3 @@
-
 import MessageList from './MessageList'
 import ChatInput from './ChatInput'
 import { Message } from '../typings'
@@ -12,7 +11,6 @@ const HomePage = async () => {
     const messages: Message[] = messagesRes
     .map((message) => JSON.parse(message))
     .sort((a, b) => a.created_at - b.created_at)
-
 
     
     const session = await unstable_getServerSession()
