@@ -51,7 +51,7 @@ const ChatInput = ({session}: Props) => {
     <form onSubmit ={addMessage} className='fixed w-full flex bg-secondary bottom-0 px-10 py-5 space-x-2 border-t border-secondary z-50'>
       <input type="text" 
       disabled={!session}
-      placeholder="Start typing..."
+      placeholder="Start typing...."
       onChange={(e)=> setInput(e.target.value)}
         value={input}
       className="flex w-full rounded border border-gray-300  focus:outline-none placeholder:text-sm px-2  focus:ring-2 focus:ring-primary focus:border-transparent  disabled:opcaity-50 disabled:cursor-not-allowed"
